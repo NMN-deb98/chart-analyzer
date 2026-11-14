@@ -74,7 +74,7 @@ li{margin-bottom:6px}
 <script>
 // ===== تنظیمات =====
 var BUILTIN_KEY = "";
-var MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-flash-latest", "gemini-2.5-flash"];
+var MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-flash-latest", "gemini-2.5-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite"];
 var MARKET_KEYWORDS = {
   "ارز دیجیتال": "crypto market",
   "فارکس": "forex dollar central bank",
@@ -172,7 +172,7 @@ async function gemini(system, parts){
       throw new Error("هوش مصنوعی پاسخی نداد. عکس دیگری امتحان کنید.");
     }
     last = {status:resp.status, message:(data && data.error && data.error.message) || "unknown"};
-    if (resp.status === 404 || resp.status === 400) continue;
+    if (resp.status === 404 || resp.status === 400 || resp.status === 429) continue;
     break;
   }
   if (last.status === 429) throw new Error("سقف استفاده‌ی رایگان پر شده. چند دقیقه صبر کنید (یا فردا دوباره امتحان کنید).");
